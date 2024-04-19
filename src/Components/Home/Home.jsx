@@ -7,9 +7,7 @@ function Home() {
        
       <div className=' m-3  p-6 rounded-2xl min-h-[30vh] w-max border-solid border-4 border-gray-700 '>
         <div>
-          <div>
-            <h2 className='text-3xl p-2 w-max border-red-800 rounded-2xl border-solid border-2 transition-all  cursor-pointer text-white '> Swapnil Ingle</h2>
-          </div>
+          
           <div className='flex '>
             <div>
               <h4 className='text-xl'> Learning Following :- </h4>
