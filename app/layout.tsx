@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/ui/app-sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,22 +23,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" >
-      <head>
-        <meta name="google-adsense-account" content="ca-pub-1775178587078079" />
-      </head>
-
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarTrigger />
-          {children}
-        </SidebarProvider>
+        {children}
       </body>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1775178587078079"
-        crossOrigin="anonymous"></script>
     </html>
   );
 }
