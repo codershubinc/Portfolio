@@ -1,0 +1,31 @@
+# robots.txt for Swapnil Ingle Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://portfolio.codershubinc.tech/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Allow all search engines to index
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Block access to sensitive files
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /api/
