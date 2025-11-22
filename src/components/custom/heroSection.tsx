@@ -22,24 +22,7 @@ function HeroSection({ githubProfile, githubStreak }: HeroSectionProps) {
             className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20"
         >
             <div className="max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 w-full">
-                {/* Avatar */}
-                {githubProfile?.avatar_url && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-sky-500/20 shadow-[0_0_40px_-10px_rgba(14,165,233,0.5)] mb-6"
-                    >
-                        <Image
-                            src={githubProfile.avatar_url}
-                            alt={githubProfile.name || "Profile Avatar"}
-                            width={160}
-                            height={160}
-                            className="w-full h-full object-cover"
-                            priority
-                        />
-                    </motion.div>
-                )}
+                {/* Avatar removed for minimalist look */}
 
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
@@ -134,7 +117,10 @@ function HeroSection({ githubProfile, githubStreak }: HeroSectionProps) {
                         className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8"
                     >
                         <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
-                            <span className="text-slate-400 text-sm">Total Contributions</span>
+                            <div className="flex flex-col">
+                                <span className="text-slate-400 text-sm">Total Contributions</span>
+                                <span className="text-slate-500 text-xs">from {githubStreak.firstContribution}</span>
+                            </div>
                             <span className="text-white font-bold">{githubStreak.totalContributions}</span>
                         </div>
                         <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">

@@ -1,16 +1,14 @@
 
-import NavBar from '@/components/custom/navBar'
-import HeroSection from '@/components/custom/heroSection'
+import HeroSection from '@/components/sections/HeroSection'
 import AboutSection from '@/components/sections/AboutSection'
 import ProjectsSection from '@/components/sections/ProjectsSection'
-import Ski5lsSection from '@/components/sections/SkillsSection'
+import SkillsSection from '@/components/sections/SkillsSection'
 import JourneySection from '@/components/sections/JourneySection'
-import { ContactSection, Footer } from '@/components/sections/ContactSection'
-import { fetchGithubProfile, fetchGithubActivity, fetchPinnedRepos, fetchGithubStreak } from '@/lib/api/github'
+import { ContactSection } from '@/components/sections/ContactSection'
+import { fetchGithubActivity, fetchPinnedRepos, fetchGithubStreak } from '@/lib/api/github'
 
 export default async function Home() {
-  const [profile, activity, projects, streak] = await Promise.all([
-    fetchGithubProfile(),
+  const [activity, projects, streak] = await Promise.all([
     fetchGithubActivity(),
     fetchPinnedRepos(),
     fetchGithubStreak()
@@ -18,20 +16,14 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen">
-      <header>
-        <NavBar />
-      </header>
       <main role="main" aria-label="Portfolio content">
-        <HeroSection githubProfile={profile} githubStreak={streak} />
+        <HeroSection />
         <AboutSection githubActivity={activity} githubStreak={streak} />
         <ProjectsSection projects={projects} />
-        <Ski5lsSection />
+        <SkillsSection />
         <JourneySection />
         <ContactSection />
       </main>
-      <footer>
-        <Footer />
-      </footer>
     </div>
   );
 }

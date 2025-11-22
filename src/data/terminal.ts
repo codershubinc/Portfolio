@@ -21,33 +21,47 @@ const generateContributions = () => {
     return contributions;
 };
 
+export const fetchGithubActivity = async () => {
+    try {
+        const response = await fetch("https://github-contributions-api.deno.dev/codershubinc.json?flat=true");
+        if (!response.ok) throw new Error("Failed to fetch GitHub activity");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching GitHub activity:", error);
+        return null;
+    }
+};
+
+export const fetchGithubProfile = async () => {
+    try {
+        const response = await fetch("https://api.github.com/users/codershubinc");
+        if (!response.ok) throw new Error("Failed to fetch GitHub profile");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching GitHub profile:", error);
+        return null;
+    }
+};
+
 export const terminalData = {
     overview: {
-        endpoint: "https://api.codershub.inc/v1/portfolio",
+        endpoint: "https://api.portfolio.dev/v1/me",
         response: {
             status: 200,
             message: "OK",
             data: {
-                organization: "CodersHub Inc",
-                type: "Open Source Collective",
-                mission: "Building Developer Excellence",
+                name: "Swapnil Ingle",
+                role: "Full Stack Developer",
+                focus: "Building Scalable Web Applications",
                 stack: ["Next.js", "TypeScript", "TailwindCSS", "Node.js"],
-                maintainer: {
-                    name: siteConfig.author.name,
-                    github: siteConfig.author.github
-                },
+                status: "Open for Opportunities",
                 github_stats: {
                     public_repos: 64,
                     followers: 5,
-                    bio: "just coding && listening music @codershubinc",
+                    bio: "just coding && listening music",
                     location: "Earth",
                     blog: "codershubinc.tech",
                     avatar_url: "https://avatars.githubusercontent.com/u/90494823?v=4"
-                },
-                projects: {
-                    count: "10+",
-                    status: "Active Development",
-                    link: "/projects"
                 }
             },
             timestamp: new Date().toISOString()

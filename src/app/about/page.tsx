@@ -1,5 +1,4 @@
 import React from 'react'
-import NavBar from '@/components/custom/navBar'
 import Image from 'next/image'
 
 export const metadata = {
@@ -10,8 +9,6 @@ export const metadata = {
 export default function About() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-            <NavBar />
-
             <main className="container mx-auto px-6 py-12">
                 {/* Hero Section */}
                 <section className="text-center mb-16">
