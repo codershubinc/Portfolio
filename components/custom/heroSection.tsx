@@ -6,7 +6,11 @@ import { TypeAnimation } from 'react-type-animation'
 import { motion } from 'framer-motion'
 import SocialLinks from '@/components/shared/SocialLinks'
 
-function HeroSection() {
+interface HeroSectionProps {
+    githubProfile?: any;
+}
+
+function HeroSection({ githubProfile }: HeroSectionProps) {
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -65,6 +69,25 @@ function HeroSection() {
                         CodersHub Inc
                     </a>.
                 </motion.p>
+
+                {/* GitHub Stats */}
+                {githubProfile && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                        className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8"
+                    >
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                            <span className="text-slate-400 text-sm">Public Repos</span>
+                            <span className="text-white font-bold">{githubProfile.public_repos}</span>
+                        </div>
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                            <span className="text-slate-400 text-sm">Followers</span>
+                            <span className="text-white font-bold">{githubProfile.followers}</span>
+                        </div>
+                    </motion.div>
+                )}
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

@@ -6,16 +6,22 @@ import ProjectsSection from '@/components/sections/ProjectsSection'
 import SkillsSection from '@/components/sections/SkillsSection'
 import JourneySection from '@/components/sections/JourneySection'
 import { ContactSection, Footer } from '@/components/sections/ContactSection'
+import { fetchGithubProfile, fetchGithubActivity } from '@/lib/github'
 
-export default function Home() {
+export default async function Home() {
+  const [profile, activity] = await Promise.all([
+    fetchGithubProfile(),
+    fetchGithubActivity()
+  ]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen">
       <header>
         <NavBar />
       </header>
       <main role="main" aria-label="Portfolio content">
-        <HeroSection />
-        <AboutSection />
+        <HeroSection githubProfile={profile} />
+        <AboutSection githubActivity={activity} />
         <ProjectsSection />
         <SkillsSection />
         <JourneySection />

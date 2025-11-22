@@ -4,7 +4,11 @@ import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-function AboutSection() {
+interface AboutSectionProps {
+    githubActivity?: any;
+}
+
+function AboutSection({ githubActivity }: AboutSectionProps) {
     return (
         <section id="about" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
@@ -21,7 +25,7 @@ function AboutSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         viewport={{ once: true }}
-                        className="flex justify-center lg:justify-start order-2 lg:order-1"
+                        className="flex flex-col items-center lg:items-start order-2 lg:order-1 gap-8"
                     >
                         <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-sky-500/30">
                             <Image
@@ -33,6 +37,37 @@ function AboutSection() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-sky-500/20 to-transparent"></div>
                         </div>
+
+                        {/* Contribution Graph */}
+                        {githubActivity && (
+                            <div className="w-full bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-white font-semibold text-sm">GitHub Contributions</h3>
+                                    <span className="text-sky-400 text-xs font-mono">{githubActivity.totalContributions} contributions in the last year</span>
+                                </div>
+                                <div className="w-full overflow-x-auto pb-2">
+                                    <div className="min-w-[300px] flex items-center justify-center">
+                                        <div className="grid grid-rows-7 grid-flow-col gap-[2px]">
+                                            {githubActivity.contributions.slice(-150).map((day: any, i: number) => {
+                                                let bgColor = "#1e293b"; // slate-800
+                                                if (day.contributionCount > 0) bgColor = "#0ea5e9"; // sky-500
+                                                if (day.contributionCount > 2) bgColor = "#38bdf8"; // sky-400
+                                                if (day.contributionCount > 4) bgColor = "#7dd3fc"; // sky-300
+                                                
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        className="w-2.5 h-2.5 rounded-[1px]"
+                                                        style={{ backgroundColor: bgColor }}
+                                                        title={`${day.contributionCount} contributions on ${day.date}`}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </motion.div>
 
                     {/* Right Column - Content */}

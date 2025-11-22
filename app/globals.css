@@ -1,8 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* OG Theme (Default - Slate/Gray 900) */
+  --background: #111827;
+  --foreground: #ffffff;
+  --muted-foreground: #9ca3af;
+  --border: #1f2937;
+  --input: #1f2937;
+  --ring: #2563eb;
+  --card: #1f2937;
+  --card-foreground: #ffffff;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+}
+
+[data-theme='backend'] {
+  /* Backend Theme (Terminal Dark) */
+  --background: #09090b;
+  --foreground: #e4e4e7;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #e4e4e7;
+  --card: #18181b;
+  --card-foreground: #e4e4e7;
+  --primary: #e4e4e7;
+  --primary-foreground: #09090b;
 }
 
 @theme inline {
@@ -12,17 +35,60 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Backend Theme Specifics */
+[data-theme='backend'] body {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Backend Theme Scrollbar */
+[data-theme='backend'] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-track {
+  background: #0c0c0c;
+  border-left: 1px solid #27272a;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border: 2px solid #0c0c0c;
+  border-radius: 4px;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+[data-theme='backend'] ::-webkit-scrollbar-corner {
+  background: #0c0c0c;
+}
+
+/* Slight radius for backend theme */
+[data-theme='backend'] .rounded-lg,
+[data-theme='backend'] .rounded-xl,
+[data-theme='backend'] .rounded-2xl,
+[data-theme='backend'] .rounded-md,
+[data-theme='backend'] .btn,
+[data-theme='backend'] .card {
+  border-radius: 6px !important;
+}
+
+/* Keep full rounded for avatars/circles */
+[data-theme='backend'] .rounded-full {
+  border-radius: 9999px !important;
+}
+
+[data-theme='backend'] ::selection {
+  background: #3f3f46;
+  color: #e4e4e7;
 }
 
 /* Custom animations for hero section */
@@ -43,4 +109,90 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Backend Theme Animations */
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: var(--typing-width, 100%)
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: #e4e4e7
+  }
+}
+
+[data-theme='backend'] .typing-effect {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #e4e4e7;
+  width: 0;
+  /* Start at 0 */
+  animation:
+    typing 2s steps(40, end) forwards,
+    blink-caret .75s step-end infinite;
+}
+
+[data-theme='backend'] .typing-command {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #e4e4e7;
+  width: 0;
+  animation:
+    typing 2s steps(40, end) forwards,
+    blink-caret .75s step-end infinite;
+}
+
+[data-theme='backend'] .project-card {
+  border: 1px solid #27272a !important;
+  background: #0c0c0c !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+}
+
+[data-theme='backend'] .project-card:hover {
+  box-shadow: 0 0 10px #27272a !important;
+}
+
+[data-theme='backend'] header,
+[data-theme='backend'] footer,
+[data-theme='backend'] nav {
+  border-color: #27272a !important;
+  background: #09090b !important;
+}
+
+[data-theme='backend'] a,
+[data-theme='backend'] button {
+  border: 1px solid #27272a !important;
+  background: transparent !important;
+  color: #e4e4e7 !important;
+}
+
+[data-theme='backend'] a:hover,
+[data-theme='backend'] button:hover {
+  background: #e4e4e7 !important;
+  color: #09090b !important;
+}
+
+[data-theme='backend'] nav a {
+  border: none !important;
+}
+
+[data-theme='backend'] nav a:hover {
+  background: transparent !important;
+  color: #e4e4e7 !important;
 }

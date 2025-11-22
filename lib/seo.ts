@@ -30,6 +30,7 @@ export const viewport: Viewport = {
 
 // Main metadata configuration
 export const metadata: Metadata = {
+    metadataBase: new URL(siteConfig.url),
     title: {
         default: siteConfig.title,
         template: `%s | ${siteConfig.name} - Developer Portfolio`
