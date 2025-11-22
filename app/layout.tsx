@@ -5,20 +5,8 @@ import { structuredData } from "@/lib/structured-data";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import "@/lib/polyfills";
 import "./globals.css";
-
-// Polyfill localStorage for SSR if needed
-if (typeof window === 'undefined' && (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function')) {
-  const noop = () => { };
-  global.localStorage = {
-    getItem: () => null,
-    setItem: noop,
-    removeItem: noop,
-    clear: noop,
-    length: 0,
-    key: () => null,
-  } as any;
-}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
