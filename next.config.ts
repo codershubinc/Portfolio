@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/api/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'opengraph.githubassets.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     dangerouslyAllowSVG: true,

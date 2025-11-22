@@ -10,4 +10,7 @@ export interface Project {
     tagline?: string;
     featured?: boolean;
     downloadLink?: string;
+    iframeUrl?: string;
+    marketplaceUrl?: string;
+    imageUrl?: string;
 }

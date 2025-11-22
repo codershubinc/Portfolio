@@ -6,13 +6,13 @@ import ProjectsSection from '@/components/sections/ProjectsSection'
 import Ski5lsSection from '@/components/sections/SkillsSection'
 import JourneySection from '@/components/sections/JourneySection'
 import { ContactSection, Footer } from '@/components/sections/ContactSection'
-import { fetchGithubProfile, fetchGithubActivity, fetchGithubRepos } from '@/lib/github'
+import { fetchGithubProfile, fetchGithubActivity, fetchPinnedRepos } from '@/lib/api/github'
 
 export default async function Home() {
-  const [profile, activity, repos] = await Promise.all([
+  const [profile, activity, projects] = await Promise.all([
     fetchGithubProfile(),
     fetchGithubActivity(),
-    fetchGithubRepos()
+    fetchPinnedRepos()
   ]);
 
   return (
@@ -23,7 +23,7 @@ export default async function Home() {
       <main role="main" aria-label="Portfolio content">
         <HeroSection githubProfile={profile} />
         <AboutSection githubActivity={activity} />
-        <ProjectsSection githubRepos={repos} />
+        <ProjectsSection projects={projects} />
         <Ski5lsSection />
         <JourneySection />
         <ContactSection />

@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { TypeAnimation } from 'react-type-animation'
 import { motion } from 'framer-motion'
 import SocialLinks from '@/components/shared/SocialLinks'
@@ -20,13 +21,32 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
             className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20"
         >
             <div className="max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 w-full">
+                {/* Avatar */}
+                {githubProfile?.avatar_url && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5 }}
+                        className="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-sky-500/20 shadow-xl shadow-sky-500/10 mb-6"
+                    >
+                        <Image
+                            src={githubProfile.avatar_url}
+                            alt={githubProfile.name || "Profile Avatar"}
+                            width={160}
+                            height={160}
+                            className="w-full h-full object-cover"
+                            priority
+                        />
+                    </motion.div>
+                )}
+
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight"
                 >
-                    Swapnil Ingle
+                    {githubProfile?.name || "Swapnil Ingle"}
                 </motion.h1>
 
                 <motion.div
@@ -69,6 +89,16 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                     >
                         {siteConfig.name}
                     </a>.
+                    {githubProfile?.bio && (
+                        <span className="block mt-4 text-slate-400 italic">
+                            &quot;{githubProfile.bio}&quot;
+                        </span>
+                    )}
+                    {githubProfile?.location && (
+                        <span className="block mt-2 text-sm text-slate-500">
+                            📍 {githubProfile.location}
+                        </span>
+                    )}
                 </motion.p>
 
                 {/* GitHub Stats */}
@@ -79,16 +109,21 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                         transition={{ duration: 0.6, delay: 0.7 }}
                         className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8"
                     >
-                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
                             <span className="text-slate-400 text-sm">Public Repos</span>
                             <span className="text-white font-bold">{githubProfile.public_repos}</span>
                         </div>
-                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
                             <span className="text-slate-400 text-sm">Followers</span>
                             <span className="text-white font-bold">{githubProfile.followers}</span>
                         </div>
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
+                            <span className="text-slate-400 text-sm">Following</span>
+                            <span className="text-white font-bold">{githubProfile.following}</span>
+                        </div>
                     </motion.div>
                 )}
+
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
