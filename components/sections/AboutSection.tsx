@@ -53,7 +53,7 @@ function AboutSection({ githubActivity }: AboutSectionProps) {
                                                 if (day.contributionCount > 0) bgColor = "#0ea5e9"; // sky-500
                                                 if (day.contributionCount > 2) bgColor = "#38bdf8"; // sky-400
                                                 if (day.contributionCount > 4) bgColor = "#7dd3fc"; // sky-300
-                                                
+
                                                 return (
                                                     <div
                                                         key={i}

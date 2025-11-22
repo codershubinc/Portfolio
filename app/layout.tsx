@@ -3,11 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { metadata, viewport } from "@/lib/seo";
 import { structuredData } from "@/lib/structured-data";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 // Polyfill localStorage for SSR if needed
 if (typeof window === 'undefined' && (typeof localStorage === 'undefined' || typeof localStorage.getItem !== 'function')) {
-  const noop = () => {};
+  const noop = () => { };
   global.localStorage = {
     getItem: () => null,
     setItem: noop,
@@ -51,11 +53,15 @@ export default function RootLayout({
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="backend"
-          themes={['backend']}
+          themes={['og', 'retro', 'black', 'backend']}
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>
