@@ -47,7 +47,27 @@ const projects: Project[] = [
     }
 ]
 
-function ProjectsSection() {
+interface ProjectsSectionProps {
+    githubRepos?: any[];
+}
+
+function ProjectsSection({ githubRepos = [] }: ProjectsSectionProps) {
+    // Map GitHub repos to Project interface
+    const dynamicProjects: Project[] = githubRepos.map(repo => ({
+        title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()), // Format title
+        description: repo.description || "No description available",
+        techStack: [repo.language, ...(repo.topics || [])].filter(Boolean).slice(0, 4), // Limit tags
+        githubUrl: repo.html_url,
+        liveUrl: repo.homepage || undefined
+    }));
+
+    // Filter out projects that are already in the static list (by matching GitHub URL)
+    const staticRepoUrls = new Set(projects.map(p => p.githubUrl));
+    const uniqueDynamicProjects = dynamicProjects.filter(p => !staticRepoUrls.has(p.githubUrl));
+
+    // Combine static featured projects with recent GitHub repos
+    const allProjects = [...projects, ...uniqueDynamicProjects].slice(0, 6); // Limit to 6 total
+
     return (
         <section id="projects" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
@@ -66,7 +86,7 @@ function ProjectsSection() {
                 </motion.div>
 
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                    {projects.map((project, index) => (
+                    {allProjects.map((project, index) => (
                         <motion.div
                             key={project.title}
                             initial={{ opacity: 0, y: 50 }}
