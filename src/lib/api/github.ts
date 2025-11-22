@@ -29,56 +29,56 @@ export const fetchGithubActivity = async () => {
 };
 
 export const fetchGithubStreak = async () => {
-    try {
-        const response = await fetch(`https://github-readme-streak-stats-chi-three.vercel.app/?user=${GITHUB_USERNAME}&theme=radical&nocache=${Date.now()}&type=json`, {
-            next: { revalidate: 3600 }
-        });
-        if (!response.ok) throw new Error("Failed to fetch GitHub streak");
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching GitHub streak:", error);
-        return null;
-    }
+  try {
+    const response = await fetch(`https://github-readme-streak-stats-chi-three.vercel.app/?user=${GITHUB_USERNAME}&theme=radical&nocache=${Date.now()}&type=json`, {
+      next: { revalidate: 3600 }
+    });
+    if (!response.ok) throw new Error("Failed to fetch GitHub streak");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching GitHub streak:", error);
+    return null;
+  }
 };
 
 export const fetchSpecificRepo = async (repoName: string): Promise<Project | null> => {
-    try {
-        const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`, {
-            next: { revalidate: 86400 } // 24 hours cache
-        });
-        if (!response.ok) return null;
-        const repo = await response.json();
-        return {
-            id: repo.name,
-            title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
-            slug: repo.name,
-            description: repo.description || "No description available",
-            techStack: [repo.language, ...(repo.topics || [])].filter(Boolean).slice(0, 4),
-            githubUrl: repo.html_url,
-            liveUrl: repo.homepage || "",
-            featured: true,
-            imageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`
-        };
-    } catch (error) {
-        console.error(`Error fetching repo ${repoName}:`, error);
-        return null;
-    }
+  try {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}`, {
+      next: { revalidate: 86400 } // 24 hours cache
+    });
+    if (!response.ok) return null;
+    const repo = await response.json();
+    return {
+      id: repo.name,
+      title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
+      slug: repo.name,
+      description: repo.description || "No description available",
+      techStack: [repo.language, ...(repo.topics || [])].filter(Boolean).slice(0, 4),
+      githubUrl: repo.html_url,
+      liveUrl: repo.homepage || "",
+      featured: true,
+      imageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`
+    };
+  } catch (error) {
+    console.error(`Error fetching repo ${repoName}:`, error);
+    return null;
+  }
 };
 
 export const fetchPinnedRepos = async (): Promise<Project[]> => {
-    // Always fetch myFlix as a featured project
-    const myFlix = await fetchSpecificRepo("myFlix");
-    
-    if (!GITHUB_TOKEN) {
-        console.warn("GITHUB_TOKEN not found, falling back to starred repos");
-        const repos = await fetchGithubRepos();
-        if (myFlix && !repos.find(r => r.id === myFlix.id)) {
-            return [myFlix, ...repos];
-        }
-        return repos;
-    }
+  // Always fetch myFlix as a featured project
+  const myFlix = await fetchSpecificRepo("myFlix");
 
-    const query = `
+  if (!GITHUB_TOKEN) {
+    console.warn("GITHUB_TOKEN not found, falling back to starred repos");
+    const repos = await fetchGithubRepos();
+    if (myFlix && !repos.find(r => r.id === myFlix.id)) {
+      return [myFlix, ...repos];
+    }
+    return repos;
+  }
+
+  const query = `
     {
       user(login: "${GITHUB_USERNAME}") {
         pinnedItems(first: 6, types: REPOSITORY) {
@@ -126,27 +126,27 @@ export const fetchPinnedRepos = async (): Promise<Project[]> => {
     let projects: Project[] = [];
 
     if (pinnedItems.length > 0) {
-        projects = pinnedItems.map((repo: any) => ({
-            id: repo.name,
-            title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
-            slug: repo.name,
-            description: repo.description || "No description available",
-            techStack: [
-                repo.languages?.nodes?.[0]?.name,
-                ...(repo.repositoryTopics?.nodes?.map((t: any) => t.topic.name) || [])
-            ].filter(Boolean).slice(0, 4),
-            githubUrl: repo.url,
-            liveUrl: repo.homepageUrl || "",
-            featured: true,
-            imageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`
-        }));
+      projects = pinnedItems.map((repo: any) => ({
+        id: repo.name,
+        title: repo.name.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase()),
+        slug: repo.name,
+        description: repo.description || "No description available",
+        techStack: [
+          repo.languages?.nodes?.[0]?.name,
+          ...(repo.repositoryTopics?.nodes?.map((t: any) => t.topic.name) || [])
+        ].filter(Boolean).slice(0, 4),
+        githubUrl: repo.url,
+        liveUrl: repo.homepageUrl || "",
+        featured: true,
+        imageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USERNAME}/${repo.name}`
+      }));
     } else {
-        projects = await fetchGithubRepos();
+      projects = await fetchGithubRepos();
     }
 
     // Add myFlix if it's not already in the list
     if (myFlix && !projects.find(p => p.id === myFlix.id)) {
-        projects.unshift(myFlix);
+      projects.unshift(myFlix);
     }
 
     return projects;
@@ -155,7 +155,7 @@ export const fetchPinnedRepos = async (): Promise<Project[]> => {
     console.error("Error fetching pinned repos:", error);
     const repos = await fetchGithubRepos();
     if (myFlix && !repos.find(r => r.id === myFlix.id)) {
-        return [myFlix, ...repos];
+      return [myFlix, ...repos];
     }
     return repos;
   }
