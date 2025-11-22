@@ -46,6 +46,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="bg-grid-pattern" />
+          <div className="bg-glow" />
           <div className="relative z-10 flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>

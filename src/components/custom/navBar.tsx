@@ -21,15 +21,15 @@ function NavBar() {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700">
+            <nav className="fixed top-0 left-0 right-0 z-50 glass">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                            <div className="bg-sky-500 p-2 rounded-full">
+                            <div className="bg-gradient-to-br from-sky-500 to-indigo-600 p-2 rounded-lg shadow-lg shadow-sky-500/20">
                                 <span className="text-white font-bold text-sm">S</span>
                             </div>
-                            <span className="text-white font-bold text-xl">Portfolio</span>
+                            <span className="text-white font-bold text-xl tracking-tight">Portfolio</span>
                         </Link>
 
                         {/* Desktop Menu */}
@@ -39,7 +39,7 @@ function NavBar() {
                                     <li key={item.label}>
                                         <Link
                                             href={item.href}
-                                            className="text-slate-300 hover:text-sky-400 transition-colors duration-300 font-medium"
+                                            className="text-slate-300 hover:text-white hover:text-shadow-glow transition-all duration-300 font-medium text-sm uppercase tracking-wide"
                                         >
                                             {item.label}
                                         </Link>
@@ -48,7 +48,7 @@ function NavBar() {
                             </ul>
 
                             {/* Avatar - only visible on md+ screens */}
-                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-sky-500/30 hover:border-sky-500 transition-colors duration-300">
+                            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-sky-500/30 hover:border-sky-500 transition-colors duration-300 shadow-lg shadow-sky-500/10">
                                 <img
                                     src="/avatar.jpeg"
                                     alt="Swapnil Ingle"

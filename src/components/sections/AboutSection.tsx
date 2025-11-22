@@ -8,9 +8,10 @@ import { siteConfig } from '@/data/site'
 
 interface AboutSectionProps {
     githubActivity?: any;
+    githubStreak?: any;
 }
 
-function AboutSection({ githubActivity }: AboutSectionProps) {
+function AboutSection({ githubActivity, githubStreak }: AboutSectionProps) {
     return (
         <section id="about" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
@@ -40,12 +41,30 @@ function AboutSection({ githubActivity }: AboutSectionProps) {
                             <div className="absolute inset-0 bg-gradient-to-t from-sky-500/20 to-transparent"></div>
                         </div>
 
+                        {/* Streak Stats */}
+                        {githubStreak && (
+                            <div className="w-full grid grid-cols-3 gap-3 sm:gap-4">
+                                <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700 text-center hover:border-sky-500/30 transition-colors">
+                                    <div className="text-xl sm:text-2xl font-bold text-white">{githubStreak.totalContributions}</div>
+                                    <div className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider mt-1">Total</div>
+                                </div>
+                                <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700 text-center hover:border-sky-500/30 transition-colors">
+                                    <div className="text-xl sm:text-2xl font-bold text-sky-500">{githubStreak.currentStreak.length}</div>
+                                    <div className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider mt-1">Current Streak</div>
+                                </div>
+                                <div className="bg-slate-800/50 p-3 rounded-lg border border-slate-700 text-center hover:border-sky-500/30 transition-colors">
+                                    <div className="text-xl sm:text-2xl font-bold text-white">{githubStreak.longestStreak.length}</div>
+                                    <div className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider mt-1">Longest Streak</div>
+                                </div>
+                            </div>
+                        )}
+
                         {/* Contribution Graph */}
                         {githubActivity && (
                             <div className="w-full bg-slate-800/50 p-4 rounded-lg border border-slate-700">
                                 <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-white font-semibold text-sm">GitHub Contributions</h3>
-                                    <span className="text-sky-400 text-xs font-mono">{githubActivity.totalContributions} contributions in the last year</span>
+                                    <h3 className="text-white font-semibold text-sm">Contribution Activity</h3>
+                                    <span className="text-sky-400 text-xs font-mono">Last 5 Months</span>
                                 </div>
                                 <div className="w-full overflow-x-auto pb-2">
                                     <div className="min-w-[300px] flex items-center justify-center">

@@ -10,9 +10,10 @@ import { siteConfig } from '@/data/site'
 
 interface HeroSectionProps {
     githubProfile?: any;
+    githubStreak?: any;
 }
 
-function HeroSection({ githubProfile }: HeroSectionProps) {
+function HeroSection({ githubProfile, githubStreak }: HeroSectionProps) {
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -27,7 +28,7 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-sky-500/20 shadow-xl shadow-sky-500/10 mb-6"
+                        className="mx-auto w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden border-4 border-sky-500/20 shadow-[0_0_40px_-10px_rgba(14,165,233,0.5)] mb-6"
                     >
                         <Image
                             src={githubProfile.avatar_url}
@@ -46,14 +47,14 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight"
                 >
-                    {githubProfile?.name || "Swapnil Ingle"}
+                    <span className="text-gradient">{githubProfile?.name || "Swapnil Ingle"}</span>
                 </motion.h1>
 
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-xl sm:text-2xl md:text-3xl text-sky-500 font-semibold min-h-[1.5em] mb-6 sm:mb-8 flex items-center justify-center"
+                    className="text-xl sm:text-2xl md:text-3xl text-sky-400 font-semibold min-h-[1.5em] mb-6 sm:mb-8 flex items-center justify-center"
                 >
                     <TypeAnimation
                         sequence={[
@@ -120,6 +121,29 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                         <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
                             <span className="text-slate-400 text-sm">Following</span>
                             <span className="text-white font-bold">{githubProfile.following}</span>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* GitHub Streak Stats */}
+                {githubStreak && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.6, delay: 0.75 }}
+                        className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-8"
+                    >
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
+                            <span className="text-slate-400 text-sm">Total Contributions</span>
+                            <span className="text-white font-bold">{githubStreak.totalContributions}</span>
+                        </div>
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
+                            <span className="text-slate-400 text-sm">Current Streak</span>
+                            <span className="text-sky-500 font-bold">{githubStreak.currentStreak.length} days</span>
+                        </div>
+                        <div className="bg-slate-800/50 border border-slate-700 px-4 py-2 rounded-lg flex items-center gap-2 hover:border-sky-500/50 transition-colors">
+                            <span className="text-slate-400 text-sm">Longest Streak</span>
+                            <span className="text-white font-bold">{githubStreak.longestStreak.length} days</span>
                         </div>
                     </motion.div>
                 )}
