@@ -24,11 +24,11 @@ export const navigationConfig: NavigationConfig = {
         quickLinks: [
             { title: "All Projects", href: "/projects" },
             { title: "Contact", href: "/contact" },
-            { title: "GitHub Organization", href: siteConfig.social.github, external: true },
+            { title: "GitHub Organization", href: siteConfig.links.githubOrg, external: true },
         ],
         resources: [
-            { title: "Source Code", href: "https://github.com/codershubinc/codershubinc.tech", external: true },
-            { title: "Report Issues", href: "https://github.com/codershubinc/codershubinc.tech/issues", external: true },
+            { title: "Source Code", href: siteConfig.links.sourceCode, external: true },
+            { title: "Report Issues", href: siteConfig.links.githubIssues, external: true },
             { title: "About Creator", href: siteConfig.author.url, external: true },
         ],
         legal: [

@@ -4,6 +4,8 @@ import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
+import { siteConfig } from '@/data/site'
+
 interface AboutSectionProps {
     githubActivity?: any;
 }
@@ -96,12 +98,12 @@ function AboutSection({ githubActivity }: AboutSectionProps) {
                             <p>
                                 My passion for building developer tools led me to create{' '}
                                 <a
-                                    href="https://codershubinc.tech"
+                                    href={siteConfig.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-sky-500 hover:text-sky-400 font-semibold transition-colors duration-300 underline decoration-sky-500/30 hover:decoration-sky-400"
                                 >
-                                    CodersHub Inc
+                                    {siteConfig.name}
                                 </a>
                                 , my brand for all my open-source projects. It represents my commitment to the developer
                                 community and my belief in the power of shared knowledge.

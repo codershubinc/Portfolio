@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { siteConfig } from '@/data/site';
 import { navigationConfig } from '@/data/navigation';
 import { SocialMediaLinks } from '@/components/ui/SocialIcon';
+import { NewsletterForm } from '@/components/ui/NewsletterForm';
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
@@ -110,16 +111,7 @@ export function Footer() {
                             <p className="text-muted-foreground mb-6 text-sm md:text-base">
                                 Get notified about new projects and updates. No spam, ever.
                             </p>
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    className="flex-1 px-4 py-3 bg-input border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent text-sm md:text-base"
-                                />
-                                <button className="px-4 md:px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-lg transition-colors duration-200 text-sm md:text-base">
-                                    Subscribe
-                                </button>
-                            </div>
+                            <NewsletterForm />
                             <p className="text-muted-foreground text-xs md:text-sm mt-3">
                                 By subscribing, you agree to our privacy policy.
                             </p>

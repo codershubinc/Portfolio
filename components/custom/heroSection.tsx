@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation'
 import { motion } from 'framer-motion'
 import SocialLinks from '@/components/shared/SocialLinks'
+import { siteConfig } from '@/data/site'
 
 interface HeroSectionProps {
     githubProfile?: any;
@@ -61,12 +62,12 @@ function HeroSection({ githubProfile }: HeroSectionProps) {
                 >
                     I build practical, open-source tools that solve real-world problems for developers.
                     Creator of <a
-                        href="https://codershubinc.tech"
+                        href={siteConfig.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sky-500 hover:text-sky-400 font-semibold transition-colors duration-300  decoration-sky-500/30 hover:decoration-sky-400"
                     >
-                        CodersHub Inc
+                        {siteConfig.name}
                     </a>.
                 </motion.p>
 

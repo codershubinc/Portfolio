@@ -196,3 +196,19 @@ html {
   background: transparent !important;
   color: #e4e4e7 !important;
 }
+
+/* Grid Background Pattern */
+.bg-grid-pattern {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  opacity: 0.15;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}

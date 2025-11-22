@@ -15,6 +15,12 @@ export interface SiteConfig {
         portfolio: string;
         email: string;
     };
+    links: {
+        githubOrg: string;
+        githubRepo: string;
+        githubIssues: string;
+        sourceCode: string;
+    };
 }
 
 export const siteConfig: SiteConfig = {
@@ -33,5 +39,11 @@ export const siteConfig: SiteConfig = {
         twitter: "https://twitter.com/codershubinc",
         portfolio: "https://portfolio.codershubinc.tech",
         email: "mailto:ingleswapnil2004@gmail.com"
+    },
+    links: {
+        githubOrg: "https://github.com/codershubinc",
+        githubRepo: "https://github.com/codershubinc/codershubinc.tech",
+        githubIssues: "https://github.com/codershubinc/codershubinc.tech/issues",
+        sourceCode: "https://github.com/codershubinc/codershubinc.tech",
     }
 };
